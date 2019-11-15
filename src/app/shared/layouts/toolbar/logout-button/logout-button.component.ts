@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { DialogLogoutComponent } from '@app/shared/dialogs/dialog-logout/dialog-logout.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-logout-button',
@@ -9,7 +10,7 @@ import { DialogLogoutComponent } from '@app/shared/dialogs/dialog-logout/dialog-
 })
 export class LogoutButtonComponent {
 
-    constructor(private dialog: MatDialog) { }
+    constructor(private dialog: MatDialog, private router: Router) { }
 
     public openLogoutDialog(): void {
         // Open logout dialog
@@ -21,6 +22,8 @@ export class LogoutButtonComponent {
             if (result) {
                 // User click on logout session button
                 console.log('Call a session service to logout');
+                localStorage.clear();
+                this.router.navigateByUrl('login');
             }
         });
 

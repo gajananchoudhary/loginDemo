@@ -13,24 +13,12 @@ export const MENU_ROUTES: MenuRoute[] = [
     },
     {
         path: 'data-tables',
-        title: 'Data tables',
+        title: 'User Information',
         icon: 'table_chart',
         submenu: [
             {
-                path: '/data-tables/simple-table',
-                title: 'Simple table'
-            },
-            {
-                path: '/data-tables/sort-table',
-                title: 'Sort table'
-            },
-            {
-                path: '/data-tables/pagination-table',
-                title: 'Pagination table'
-            },
-            {
                 path: '/data-tables/complete-table',
-                title: 'Complete table'
+                title: 'Users Data'
             }
         ]
     },

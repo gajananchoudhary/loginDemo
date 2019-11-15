@@ -1,5 +1,5 @@
 {
-    "name": "demos-angular-material",
+    "name": "myproject",
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
@@ -28,11 +28,12 @@
         "@angular/router": "^7.1.0",
         "@kolkov/angular-editor": "^0.13.1",
         "@material/layout-grid": "^0.41.0",
-        "material-design-icons-iconfont": "^4.0.2",
         "core-js": "^2.5.7",
         "crypto-js": "^3.1.9-1",
         "file-saver": "^2.0.0",
+        "material-design-icons-iconfont": "^4.0.2",
         "ngx-perfect-scrollbar": "^7.1.0",
+        "node-sass": "^4.13.0",
         "rxjs": "^6.3.3",
         "xlsx": "^0.14.1",
         "zone.js": "~0.8.26"

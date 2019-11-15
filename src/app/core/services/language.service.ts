@@ -31,8 +31,8 @@ export class LanguageService {
 
     public compare(languageA: string, languageB: string): boolean {
         // Split the language code with "_" or "-" an compare only the first position of the array
-        const languageASplited: Array<string> = languageA.split(/-|_/);
-        const languageBSplited: Array<string> = languageB.split(/-|_/);
+        const languageASplited: Array<string> = languageA.split(/-|_/) ? languageA.split(/-|_/) : null;
+        const languageBSplited: Array<string> = languageB.split(/-|_/) ? languageB.split(/-|_/) : null;
 
         return languageASplited[0] === languageBSplited[0];
     }

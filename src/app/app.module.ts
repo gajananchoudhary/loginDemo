@@ -12,13 +12,16 @@ import { AppComponent } from './app.component';
 import { SpinnerComponent } from '@app/shared/spinner/spinner.component';
 import { LoginComponent } from './components/login/login.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { UsersService } from './core/services/users.service';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		SpinnerComponent,
 		LoginComponent,
-		PasswordRecoveryComponent
+		PasswordRecoveryComponent,
+		RegistrationComponent
 	],
 	imports: [
 		// Angular
@@ -29,7 +32,7 @@ import { PasswordRecoveryComponent } from './components/password-recovery/passwo
 		// App modules
 		SharedModule,
 	],
-	providers: [],
+	providers: [UsersService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

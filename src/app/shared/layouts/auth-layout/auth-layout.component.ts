@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 export class AuthLayoutComponent {
     public currentTheme: string;
 
-    constructor() { }
+    token: any;
+
+    constructor() {
+        this.token = localStorage.getItem('token');
+     }
 
 }

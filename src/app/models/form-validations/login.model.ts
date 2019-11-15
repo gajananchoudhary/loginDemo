@@ -15,3 +15,19 @@ export const passwordRecoveryValidation = {
         { type: 'email', messageKey: 'form.validation.email' }
     ]
 }
+
+export const registrationValidation = {
+    'username': [
+        { type: 'required', messageKey: 'form.validation.required' },
+        { type: 'email', messageKey: 'form.validation.email' }
+    ],
+    'password': [
+        { type: 'required', messageKey: 'form.validation.required' },
+        { type: 'minLength', value: 4, messageKey: 'form.validation.minLength' }
+    ],
+    'name': [
+        { type: 'required', messageKey: 'form.validation.required' }
+    ]
+}
+
+

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 
 import { Ingredient } from '@app/models/index';
+import { UsersService } from '@app/core/services/users.service';
 
 @Component({
     selector: 'app-complete-table',
@@ -10,28 +11,53 @@ import { Ingredient } from '@app/models/index';
     styleUrls: ['./complete-table.component.scss']
 })
 export class CompleteTableComponent implements OnInit {
-    public dataSource: MatTableDataSource<Ingredient>;
     public displayedColumns: string[];
+    dataSource: any;
 
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    constructor(private http: HttpClient) {
-        this.displayedColumns = ['num', 'categoryID', 'name', 'calories', 'IG'];
+    constructor(private http: HttpClient, private userService: UsersService) {
+        this.displayedColumns = ['sno', 'id', 'name', 'email'];
     }
 
     ngOnInit() {
-        this.http.get('/assets/mocks/data-table.json').subscribe(
-            (data: Array<Ingredient>) => {
-                this.dataSource = new MatTableDataSource(data);
-                this.dataSource.sort = this.sort;
-                this.dataSource.paginator = this.paginator;
-            }
-        );
+
+        this.getAll();
     }
 
     public applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+
+    getAll() {
+        this.userService
+            .getAllUsers()
+            .subscribe(
+                res => this.getAllSuccess(res),
+                error => {
+                    console.log("Error In Data Fetching")
+                }
+            );
+    }
+
+    getAllSuccess(res) {
+
+        if (res && res.data && res.data.length) {
+            this.dataSource = [];
+            let userInfo = res.data;
+            userInfo.forEach(item => {
+                this.dataSource.push(item);
+                this.dataSource = new MatTableDataSource(userInfo);
+                this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
+            });
+            console.log(this.dataSource,'dataSource')
+        } else {
+            this.dataSource = [];
+        }
+
     }
 
 }

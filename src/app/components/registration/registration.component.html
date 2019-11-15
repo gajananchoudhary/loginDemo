@@ -1,0 +1,62 @@
+<form id="login" [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+    <h2>Sign Up</h2>
+    <section class="fields">
+        <div>
+            <mat-form-field>
+                <mat-icon matPrefix>face</mat-icon>
+                <input matInput type="text" formControlName="username" placeholder="Username" aria-label="Username">
+                <mat-error class="error-message" *ngIf="registrationForm.get('username').invalid">
+                    <span *ngIf="registrationForm.get('username').hasError('required')">Required</span>
+                    <span *ngIf="registrationForm.get('username').hasError('email')">Must be a valid e-mail</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-icon matPrefix>face</mat-icon>
+                <input matInput type="text" formControlName="name" placeholder="Name" aria-label="Name">
+                <mat-error class="error-message" *ngIf="registrationForm.get('name').invalid">
+                    <span *ngIf="registrationForm.get('name').hasError('required')">Required</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-icon matPrefix>lock</mat-icon>
+                <input matInput placeholder="Password" formControlName="password"
+                    [type]="hidePassword ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hidePassword = !hidePassword" class="pointer">{{hidePassword ?
+                    'visibility_off' :
+                    'visibility'}}</mat-icon>
+                <mat-error class="error-message" *ngIf="registrationForm.get('password').invalid">
+                    <span *ngIf="registrationForm.get('password').hasError('required')">Required</span>
+                    <span *ngIf="registrationForm.get('password').hasError('minlength')">Must be contains a minimum of 4
+                        characters</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </section>
+
+    <section>
+        <div class="d-flex justify-content-end">
+            <div>
+                <a routerLink="/login" [ngClass]="'md-'+theme+'-primary'">Sign In</a>
+            </div>
+        </div>
+
+        <div id="server-alert" *ngIf="loginErrorMsg" class="alert alert-danger block w-100 mb-3">
+            <span>
+                {{ loginErrorMsg }}
+            </span>
+        </div>
+    </section>
+
+    <section class="submit">
+        <div class="d-flex justify-content-between align-items-center">
+            <div [style.visibility]="waiting ? 'visible' : 'hidden'" class="spin-container animation-spin">
+                <mat-icon aria-label="loading" color="primary" class="x2">autorenew</mat-icon>
+            </div>
+            <button mat-flat-button type="submit" [disabled]="waiting" color="primary">Register</button>
+        </div>
+    </section>
+</form>

@@ -5,17 +5,17 @@ import { FormGroup } from '@angular/forms';
 import { LoggerService } from '@app/core/services/logger.service';
 
 import { FormControlHelper } from '@app/core/helpers/index';
-import { loginValidation } from '@app/models/form-validations/index';
+import { registrationValidation } from '@app/models/form-validations/index';
 import { UsersService } from '@app/core/services/users.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html'
+    selector: 'app-registration',
+    templateUrl: './registration.component.html'
 })
-export class LoginComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
     // Properties
-    public loginForm: FormGroup;
-    public loginValidationModel: any;
+    public registrationForm: FormGroup;
+    public registrationValidationModel: any;
     public waiting: boolean;
     public hidePassword: boolean;
 
@@ -24,14 +24,14 @@ export class LoginComponent implements OnInit {
         private logger: LoggerService,
         private userService: UsersService
     ) {
-        this.loginValidationModel = loginValidation;
+        this.registrationValidationModel = registrationValidation;
         this.hidePassword = true;
     }
 
     ngOnInit() {
-        const formGroupObj = FormControlHelper.generateFormControls(this.loginValidationModel);
+        const formGroupObj = FormControlHelper.generateFormControls(this.registrationValidationModel);
         if (formGroupObj) {
-            this.loginForm = new FormGroup(formGroupObj);
+            this.registrationForm = new FormGroup(formGroupObj);
         } else {
             this.logger.error(new Error('Error generating the form modal & validations'));
         }
@@ -40,18 +40,19 @@ export class LoginComponent implements OnInit {
 
     public onSubmit(value) {
 
-        if (this.loginForm.valid) {
+        if (this.registrationForm.valid) {
             this.waiting = true;
             const data = {
                 email: value.username,
-                password: value.password
+                password: value.password,
+                name: value.name
             };
             this.userService
-                .login(data)
+                .register(data)
                 .subscribe(
-                    res => this.loginSuccess(res),
+                    res => this.registerSuccess(res),
                     error => {
-                        console.log("Error In Login")
+                        console.log("Error In Register")
                         this.waiting = false;
                     }
                 );
@@ -59,15 +60,12 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    loginSuccess(res) {
+    registerSuccess(res) {
 
-        if (res && res.message && (res.message = 'successfully authenticated')) {
+        if (res && res.message && (res.message == 'user registered sucessfully')) {
             this.waiting = false;
-            localStorage.setItem('token',res.token)
-            localStorage.setItem('name',res.name)
             this.router.navigateByUrl('data-tables/complete-table');
         }
 
     }
-
 }

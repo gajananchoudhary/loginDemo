@@ -1,8 +1,3 @@
-# Angular Material demos
-
-This project provides a functionality demos using Material Design.\
-Still working to provide a beta release.
-
 ## Dependencies
 #### Mandatory
 - [@angular/core](https://www.npmjs.com/package/@angular/core) ^7.x

@@ -3,9 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SharedModule } from '@app/shared/shared.module';
 // Components
-import { SimpleTableComponent } from '@app/components/data-tables/index';
-import { SortTableComponent } from '@app/components/data-tables/index';
-import { PaginationTableComponent } from '@app/components/data-tables/index';
 import { CompleteTableComponent } from '@app/components/data-tables/index';
 
 export const dataTablesRouting: Routes = [
@@ -14,41 +11,8 @@ export const dataTablesRouting: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'simple-table',
+                redirectTo: 'complete-table',
                 pathMatch: 'full'
-            },
-            {
-                path: 'simple-table',
-                component: SimpleTableComponent,
-                data: {
-                    title: 'Data tables',
-                    icon: 'table_chart',
-                    urls: [
-                        { title: 'Simple table' }
-                    ]
-                }
-            },
-            {
-                path: 'sort-table',
-                component: SortTableComponent,
-                data: {
-                    title: 'Data tables',
-                    icon: 'table_chart',
-                    urls: [
-                        { title: 'Sort table' }
-                    ]
-                }
-            },
-            {
-                path: 'pagination-table',
-                component: PaginationTableComponent,
-                data: {
-                    title: 'Data tables',
-                    icon: 'table_chart',
-                    urls: [
-                        { title: 'Pagination table' }
-                    ]
-                }
             },
             {
                 path: 'complete-table',
@@ -67,9 +31,6 @@ export const dataTablesRouting: Routes = [
 
 @NgModule({
     declarations: [
-        SimpleTableComponent,
-        SortTableComponent,
-        PaginationTableComponent,
         CompleteTableComponent,
     ],
     imports: [

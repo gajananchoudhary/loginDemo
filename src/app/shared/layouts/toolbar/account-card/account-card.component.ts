@@ -9,8 +9,12 @@ import { ThemingService } from '@app/core/services/theming.service';
 })
 export class AccountCardComponent implements OnInit {
     currentTheme: string;
+    name: any;
 
-    constructor(private theming: ThemingService) { }
+    constructor(private theming: ThemingService) {
+       this.name = localStorage.getItem('name');
+       console.log(this.name)
+     }
 
     ngOnInit() {
         this.currentTheme = this.theming.get();
